@@ -1,0 +1,22 @@
+* Hello
+Id like to create a website for my business.
+I want a onepage website.
+My bussiness is a company that sells psychologic counseling.
+The company is located in the city of Madrid.
+I want the website to be written in python.
+I want a simple design.
+I'd like to use tangerine as the main color.
+This is the address of the website:
+www.criapsicologia.comm
+HTML: 5
+CSS: 5
+Python: 5
+I'd like to use Bootstrap as the framework.
+I'd like to use a responsive design.
+I'd like to use a logo.
+I'd like to use a map.
+I'd like to use a contact form.
+I'd like to use a newsletter.
+I'd like to use a newsletter form.
+I'd like to use a newsletter form.
+

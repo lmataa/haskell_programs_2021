@@ -1,0 +1,21 @@
+* Haskell from first
+
+Here are my notes on the Haskell language. I intend to keep this up to date as I learn Haskell.
+I am not a Haskell programmer, but I am a programmer.
+
+** Haskell REPL
+
+- The REPL is a command line interface to the Haskell language.
+- It is a way to interact with the Haskell language.
+- It is a way to test out code.
+
+It can be opened in the terminal by typing: `ghci`
+If we are working with a file, we can use the `:l` (acronym for :load) command to load the file.
+So, for example, if we have a file called `hello.hs`: `ghci hello.hs` will load the file.
+And if we are already in the REPL, we can use the `:l hello.hs` command to load the file.
+
+
+In order to leave the REPL we type `:q` (acronym for :quit).
+
+** Haskell with types
+
