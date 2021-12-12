@@ -1,14 +1,29 @@
+{-# LANGUAGE RankNTypes #-}
+
 module Lambda where
 
-type Boolean a = a -> a -> a
+import Unsafe.Coerce
 
-true :: Boolean a
-true = \x y -> x
+y :: (a -> a) -> a
+y = \f -> (\x -> f (unsafeCoerce x x)) (\x -> f (unsafeCoerce x x))
 
-false :: Boolean a
-false = \x y -> y
+true = (\x y -> x)
 
--- if I woudn't have put types to true and false this inference on not,
--- could not have been made
-not :: Boolean a -> Boolean a
-not = \f -> \x y -> f y x
+false = (\x y -> y)
+
+cond = \b t f -> b t f
+
+newtype Chur = Chr (forall a. (a -> a) -> (a -> a))
+
+zer :: Chur
+zer = Chr (\x y -> y)
+
+suc :: Chur -> Chur
+suc (Chr cn) = Chr (\h -> cn h . h)
+
+ci :: Chur -> Integer
+ci (Chr cn) = cn (+ 1) 0
+
+ic :: Integer -> Chur
+ic 0 = zer
+ic n = suc $ ic (n - 1)
