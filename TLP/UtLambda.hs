@@ -47,6 +47,7 @@ subst e x t = case e of
 -- | Beta reduction
 beta :: Term -> Term
 beta (App (Lambda x e) e') = subst e x e'
+beta (Lambda x p) = Lambda x (beta p)
 beta (App e1 e2) = App (beta e1) (beta e2)
 beta e = e
 
