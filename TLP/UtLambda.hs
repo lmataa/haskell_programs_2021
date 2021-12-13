@@ -99,15 +99,21 @@ neg (Lambda (Var "t") (Lambda (Var "f") (VarTerm (Var "f")))) = boolChurch True
 neg _ = error "Not a boolean"
 
 -- Church numbers: Exercise 12
+-- | Successor function
+succ_ :: Term -> Term
+succ_ (Lambda v (Lambda v' t)) = Lambda v (Lambda v' (App (VarTerm(Var "s")) t))
+succ_ _ = error "Not a number"
+
 -- From Haskell nat to Church nat
 natChurch :: Integer -> Term
 natChurch 0 = Lambda (Var "s") (Lambda (Var "z") (VarTerm (Var "z")))
-natChurch n = Lambda (Var "s") (Lambda (Var "z") (App (VarTerm (Var "s")) (App (VarTerm (Var "z")) (natChurch (n - 1)))))
+natChurch n = succ_ (natChurch (n - 1))
 
 -- From Church nat to Haskell nat
---natUnChurch :: Term -> Integer
---natUnChurch (Lambda (Var "s") (Lambda (Var "z") (VarTerm (Var "z")))) = 0
---natUn
+natUnChurch :: Term -> Integer
+natUnChurch (Lambda (Var "s") (Lambda (Var "z") (VarTerm (Var "z")))) = 0
+natUnChurch (Lambda (Var "s") (Lambda (Var "z") (App f t))) = 1 + natUnChurch (Lambda (Var "s") (Lambda (Var "z") t))
+natUnChurch _ = error "Not a number"
 
 -- | Some tests
 -- | Note : a $ b c = a (b c)
@@ -165,3 +171,13 @@ t6' = subst t6 (Var "a") (VarTerm (Var "k"))
 
 -- | Alpha equivalence
 t1Alpha = alpha t1 (Var "x") (Var "w")
+
+-- | Numerals
+
+one = natChurch 1
+two = natChurch 2
+three = natChurch 3
+ten = natChurch 10
+zero = natChurch 0
+
+six = succ_ (natChurch 5)
